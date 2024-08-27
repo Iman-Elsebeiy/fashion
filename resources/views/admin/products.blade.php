@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All products</title>
+  <title>All fashions</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,25 +23,36 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All products</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">All produ</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th scope="col">product name</th>
+              <th scope="col">fashion name</th>
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Show details</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
             @foreach($fashions as $fashion)
             <tr>
               <td scope="row">{{$fashion['title']}}</td>
-              <td>120000</td>
-              <td>test test test ...</td>
-              <td>YES</td>
-            </tr>
-             @endforeach
+              <td>{{$fashion['price']}} $</td>
+              <td>{{Str::limit($fashion['description'],20, '...')}}</td>
+              <td>{{$fashion->published? 'Yes':'No'}}</td>
+              <td><a href="{{route('products.edit', $fashion['id'])}}">✒️</a></td>
+              <td><a href="{{route('products.show', $fashion['id'])}}">Show</a></td>
+              <td><form action="{{route('products.destroy') }}" method="post">
+              @csrf
+              @method('delete')
+              <input type="hidden" name="id" value="{{$fashion->id}}">
+              <input type="submit" value="Delete">
+              </form></td>
+             </tr>
+            @endforeach  
           </tbody>
         </table>
       </div>

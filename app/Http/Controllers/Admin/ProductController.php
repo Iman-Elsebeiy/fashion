@@ -15,7 +15,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-
+    public function index()
+    {
+        $fashions = Fashion::get();
+        return view('admin.products', compact('fashions'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,10 +43,10 @@ class ProductController extends Controller
         ]); 
 
           $data['published'] = isset($request->published); 
-          $data['image'] = $this->uploadFile($request->image, 'assets/images/'); 
+          $data['image'] = $this->uploadFile($request->image, 'assets/images/product/'); 
 
          Fashion::create($data);
-          return "Data added successfully";
+         return redirect()->route('admin.products');
     }
 
     /**
@@ -51,7 +54,10 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
+        $fashion = Fashion::findOrFail($id);
+
+        return view('product_details', compact('fashion'));
     }
 
     /**
@@ -59,7 +65,9 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $fashion = Fashion::findOrFail($id);
+
+        return view('admin.edit_product', compact('fashion'));
     }
 
     /**
@@ -68,13 +76,41 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $data = $request->validate([
+            'title' =>  'required|string',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+
+        ]); 
+
+          $data['published'] = isset($request->published); 
+          
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/images/product/');
+        }
+        //  dd($data);
+        Fashion::where('id', $id)->update($data);
+        // return"updated";
+        return redirect()->route('products.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request): RedirectResponse
     {
         //
-    }
+        $id = $request->id;
+        Fashion::where('id', $id)->delete();
+        return redirect('admin.products');
+    } 
+     /**
+     * force delete resource from storage.
+     */
+    public function forceDeleted(string $id){
+
+        Fashion::where('id', $id)->forceDelete();
+        return redirect()->route('products.showDeleted');       
+    }    
 }

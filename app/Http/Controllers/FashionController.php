@@ -13,4 +13,15 @@ class FashionController extends Controller
        return view('fashion_index');
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+        $fashion = Fashion::findOrFail($id);
+
+        return view('product_details', compact('fashion'));
+    }
+
 }
