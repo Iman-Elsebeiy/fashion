@@ -113,8 +113,8 @@ https://www.tooplate.com/view/2127-little-fashion
                         <div class="col-lg-6 col-12">
                             <h2 class="mb-4">Let's <span>begin</span></h2>
 
-                            <form class="contact-form me-lg-5 pe-lg-3" role="form">
-
+                            <form action="{{route('contact.store')}}" method="POST" class="contact-form me-lg-5 pe-lg-3" role="form">
+                            @csrf
                                 <div class="form-floating">
                                     <input type="text" name="name" id="name" class="form-control" placeholder="Full name" required>
 

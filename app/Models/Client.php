@@ -12,9 +12,11 @@ class Client extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
+        'name',
         'email',
-        'password',
-        'active',
+        'subject',
+        'message',
+        'published',
 
     ];
 }

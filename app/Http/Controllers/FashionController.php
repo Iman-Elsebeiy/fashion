@@ -13,6 +13,12 @@ class FashionController extends Controller
        return view('fashion_index');
     }
 
+
+    public function product()
+    {
+       return view('products');
+    }
+
     /**
      * Display the specified resource.
      */
@@ -21,7 +27,7 @@ class FashionController extends Controller
         //
         $fashion = Fashion::findOrFail($id);
 
-        return view('product_details', compact('fashion'));
+        return view('product.show', compact('fashion'));
     }
 
 }

@@ -33,7 +33,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                // dd($request);
+
         $data = $request->validate([
             'title' =>  'required|string',
             'description' => 'required|string|max:1000',
@@ -42,10 +43,10 @@ class ProductController extends Controller
 
         ]); 
 
-          $data['published'] = isset($request->published); 
-          $data['image'] = $this->uploadFile($request->image, 'assets/images/product/'); 
-
-         Fashion::create($data);
+        $data['published'] = isset($request->published); 
+        $data['image'] = $this->uploadFile($request->image, 'assets/images/product/'); 
+        
+        Fashion::create($data);
          return redirect()->route('admin.products');
     }
 
@@ -89,10 +90,10 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $data['image'] = $this->uploadFile($request->image, 'assets/images/product/');
         }
-        //  dd($data);
-        Fashion::where('id', $id)->update($data);
-        // return"updated";
-        return redirect()->route('products.index');
+          dd($data);
+        // Fashion::where('id', $id)->update($data);
+         return"updated";
+        // return redirect()->route('products.index');
     }
 
     /**

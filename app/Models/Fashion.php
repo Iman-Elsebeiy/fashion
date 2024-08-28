@@ -11,7 +11,7 @@ class Fashion extends Model
     use HasFactory, SoftDeletes;
 
 
-    protected $table = ('fashions');
+    protected $table = 'fashions';
 
     protected $fillable = [
         'title',

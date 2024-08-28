@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('email')->unique();
-            // $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('active');
+            $table->string('subject');
+            $table->text('message');
+            $table->boolean('published');
             $table->timestamps();
         });
     }
