@@ -43,9 +43,9 @@
               <td>{{$fashion['price']}} $</td>
               <td>{{Str::limit($fashion['description'],20, '...')}}</td>
               <td>{{$fashion->published? 'Yes':'No'}}</td>
-              <td><a href="{{route('products.edit', $fashion['id'])}}">✒️</a></td>
-              <td><a href="{{route('products.show', $fashion['id'])}}">Show</a></td>
-              <td><form action="{{route('products.destroy') }}" method="post">
+              <td><a href="{{route('product.edit', $fashion['id'])}}">✒️</a></td>
+              <td><a href="{{route('products.show',['id'=> $fashion->id])}}">Show</a></td>
+              <td><form action="{{route('product.destroy') }}" onclick="return confirm('Are you sure you want to delelet?')" method="post">
               @csrf
               @method('delete')
               <input type="hidden" name="id" value="{{$fashion->id}}">

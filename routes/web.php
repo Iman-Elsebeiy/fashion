@@ -17,14 +17,13 @@ Route::get('fashions/{id}/show', [FashionController::class,'show'])->name('produ
 
 // product Controller
     Route::get('products', [ProductController::class,'index'])->name('products.index');
-    Route::get('add product',[ProductController::class , 'create'])->name('fashion.create');
-    Route::post('products',[ProductController::class , 'store'])->name('product.store');
-    Route::get('products/{id}/edit', [ProductController::class,'edit'])->name('products.edit');
-    Route::put('products/{id}', [ProductController::class,'update'])->name('products.update');
-    Route::get('fashions/{id}/show', [FashionController::class,'show'])->name('products.show');
+    Route::get('add product',[ProductController::class , 'create'])->name('products.create');
+    Route::post('product',[ProductController::class , 'store'])->name('product.store');
+    Route::get('product/{id}/edit', [ProductController::class,'edit'])->name('product.edit');
+    Route::put('product/{id}', [ProductController::class,'update'])->name('product.update');
 
-    Route::delete('products/delete', [ProductController::class,'destroy'])->name('products.destroy');
-    Route::get('trashed', [ProductController::class,'showDeleted'])->name('products.showDeleted');
+    Route::delete('products/delete', [ProductController::class,'destroy'])->name('product.destroy');
+    Route::get('trashed', [ProductController::class,'showDeleted'])->name('product.showDeleted');
     Route::patch('products/{id}/restore', [ProductController::class,'restore'])->name('products.restore');
     Route::delete('products/{id}/forceDelete', [ProductController::class,'forceDeleted'])->name('products.forceDeleted');
 

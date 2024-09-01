@@ -18,7 +18,5 @@ class Fashion extends Model
         'description',
         'price',
         'image',
-        'published',
-
     ];
 }

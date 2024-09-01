@@ -36,7 +36,6 @@ class ContactController extends Controller
             'email' => $request->email,
             'subject' => $request->subject,
             'message' => $request->message,
-            'published' => isset($request->$published),
 
         ]);
 

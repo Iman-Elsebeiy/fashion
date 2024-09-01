@@ -27,7 +27,7 @@ class FashionController extends Controller
         //
         $fashion = Fashion::findOrFail($id);
 
-        return view('product.show', compact('fashion'));
+        return view('product_details', compact('fashion'));
     }
 
 }
